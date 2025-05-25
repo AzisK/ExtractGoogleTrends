@@ -42,7 +42,7 @@ pip install -r requirements.txt
 
 You need to get the SerpApi key from https://serpapi.com/. Register and generate a key. It gives you 100 free searches per month.
 
-Put the key in the `.env` file in the root directory of the project. They key in the file should look like this:
+Put the key in the `.env` file in the root directory of the project. The key in the file should look like this:
 
 ```bash
 SERPAPI_KEY=<123_YOURKEY_ABC>
@@ -50,7 +50,7 @@ SERPAPI_KEY=<123_YOURKEY_ABC>
 
 5. DuckDB database preparation
 
-Run the Python script in `db/migrate.py` to create a DuckDB database file called `db/google_trends.db` together with a table described in `db/schema.sql`.
+Run the Python script in `db/migrate.py` to create a DuckDB database file called `db/google_trends.db` together with a table described in `db/create_table.sql`.
 
 Keep in mind that this database is not concurrent and does not support multiple connections.
 
