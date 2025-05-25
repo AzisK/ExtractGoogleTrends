@@ -16,7 +16,6 @@ google_trends_object = GoogleTrends().pass_params(geo, q)
 @dag(
     schedule='@daily',
     start_date=pendulum.datetime(2025, 5, 8, tz="UTC"),
-    catchup=True,
     tags=["google"],
 )
 def google_trends():
