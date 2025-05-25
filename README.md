@@ -100,8 +100,7 @@ def google_trends():
     @task
     def extract(**context):
         date = get_date_from_airflow(context)
-        results = google_trends_object.pass_date(date).extract_and_save()
-        return results
+        google_trends_object.pass_date(date).extract_and_save()
 
     @task
     def transform(**context):
