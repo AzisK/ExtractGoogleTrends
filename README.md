@@ -56,17 +56,32 @@ Keep in mind that this database is not concurrent and does not support multiple 
 
 6. Configure Airflow
 
-Configure your Airflow home directory. You can do it by setting the `AIRFLOW_HOME` environment variable. The default value is `~/airflow`. You can change it to any other directory you want.
+We need to configure Airflow for it to work properly
 
-For example, it can be set in ~/.zprofile or ~/.bash_profile
+6. 1. Configure Airflow home directory
+
+You can do it by setting the `AIRFLOW_HOME` environment variable. The default value is `~/airflow`. You can change it to any other directory you want.
+
+For example, it can be set in `~/.zprofile` or `~/.bash_profile`
 
 ```bash
 export AIRFLOW_HOME=~/airflow
 ```
 
-This will create an `airflow.cfg` file in the `~/airflow` directory once you run it.
+This will create an `airflow.cfg` file in the `~/airflow` directory once you run Airflow
 
-Once this is done, you need to set the `jwt_secret` inside you `airflow.cfg`. Set it under `[api_auth]` section. It should look like this:
+6. 2. Locate Airflow DAGs
+
+If this repo is not the same as `AIRFLOW_HOME`, then we also need to locate the Airflow DAGs in `airflow.cfg` under `[core]` section
+
+```bash
+[core]
+dags_folder = /dir1/dir2/dir3/ExtractGoogleTrends/dags
+```
+
+6. 3. Configure JWT secret
+
+Lastly, we need to set the `jwt_secret` under `[api_auth]` section inside `airflow.cfg`
 
 ```bash
 [api_auth]
@@ -96,6 +111,11 @@ The methods of the class are divided so, that they could be easily transferred t
 The Airflow DAG using the TaskFlowAPI looks like this while using the methods of the class. The class is there for general configuration and coordination of the variables.
 
 ```python
+@dag(
+    schedule='@daily',
+    start_date=pendulum.datetime(2025, 5, 8, tz="UTC"),
+    tags=["google"],
+)
 def google_trends():
     @task
     def extract(**context):
@@ -115,6 +135,8 @@ def google_trends():
         google_trends_object.pass_date(date).load()
 
     extract() >> transform() >> load()
+
+google_trends()
 ```
 
 The tasks in Airflow use local disk space files to pass data between each other. When running the methods of the `GoogleTrends` object, they also use the local disk space files to pass data between each other. The files are stored in the `/tmp` directory.
