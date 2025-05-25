@@ -8,7 +8,7 @@ from pydantic import ValidationError as PydanticValidationError
 
 from core.google_trends import GoogleTrends
 from core.google_trends_validation import GoogleTrendsResultsValidator
-from tests.consants import SAMPLE_RESPONSE, SAMPLE_DATE, SAMPLE_TRANSFORMED_RESPONSE, SAMPLE_BAD_RESPONSE, \
+from tests.constants import SAMPLE_RESPONSE, SAMPLE_DATE, SAMPLE_TRANSFORMED_RESPONSE, SAMPLE_BAD_RESPONSE, \
     SAMPLE_PARAMS_DIFFERENT, SAMPLE_RESPONSE_DIFFERENT
 
 
