@@ -88,6 +88,10 @@ Lastly, we need to set the `jwt_secret` under `[api_auth]` section inside `airfl
 jwt_secret = <your_jwt_secret>
 ```
 
+7. Airflow UI login
+
+We can find the Airflow user and password in `AIRFLOW_HOME` directory inside `simple_auth_manager_passwords.json.generated`
+
 ## Pipeline design
 
 This is a very simple approach to the pipeline. It has been designed to work with or without Airflow.
